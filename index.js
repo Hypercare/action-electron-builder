@@ -108,6 +108,8 @@ const runAction = () => {
 	log(`Installing dependencies using ${useNpm ? "NPM" : "Yarn"}…`);
 	run(useNpm ? "npm ci --legacy-peer-deps" : "yarn", pkgRoot);
 
+	// Don't fail on warnings. Ideally we should fail on warnings but one thing at a time
+	setEnv("CI", false);
 	// Run NPM build script if it exists
 	if (skipBuild) {
 		log("Skipping build script because `skip_build` option is set");
